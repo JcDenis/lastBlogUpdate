@@ -20,3 +20,14 @@ First install lastBlogUpdate, manualy from a zip package or from
 Dotaddict repository. (See Dotclear's documentation to know how do this)
 
 Add and configure "Last blog update" from widgets manager.
+
+## MORE
+
+ * License : GNU GPL v2
+ * Source & contribution : [GitHub Page](https://github.com/JcDenis/lastBlogUpdate)
+ * Packages & details:  [Dotaddict Page](https://plugins.dotaddict.org/dc2/details/lastBlogUpdate)
+
+## CONTRIBUTORS
+
+ * Jean-Chirstian Denis
+ * Pierre Van Glabeke

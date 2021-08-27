@@ -3,7 +3,7 @@
 #
 # This file is part of lastBlogUpdate, a plugin for Dotclear 2.
 # 
-# Copyright (c) 2009-2015 Jean-Christian Denis and contributors
+# Copyright (c) 2009-2021 Jean-Christian Denis and contributors
 # 
 # Licensed under the GPL version 2.0 license.
 # A copy of this license is available in LICENSE file or at
@@ -12,24 +12,20 @@
 # -- END LICENSE BLOCK ------------------------------------
 
 if (!defined('DC_RC_PATH')) {
-
-	return null;
+    return null;
 }
 
 $this->registerModule(
-	/* Name */
-	"lastBlogUpdate",
-	/* Description*/
-	"Show the dates of last updates of your blog in a widget",
-	/* Author */
-	"Jean-Christian Denis, Pierre Van Glabeke",
-	/* Version */
-	'2015.04.22',
-	array(
-		'permissions' => 'usage,contentadmin',
-		'type' => 'plugin',
-		'dc_min' => '2.6',
-		'support' => 'http://forum.dotclear.org/viewtopic.php?pid=332950#p332950',
-		'details' => 'http://plugins.dotaddict.org/dc2/details/lastBlogUpdate'
-	)
+    'lastBlogUpdate',
+    'Show the dates of last updates of your blog in a widget',
+    'Jean-Christian Denis, Pierre Van Glabeke',
+    '2021.08.27',
+    [
+        'permissions' => 'usage,contentadmin',
+        'type' => 'plugin',
+        'dc_min' => '2.19',
+        'support' => 'http://forum.dotclear.org/viewtopic.php?pid=332950#p332950',
+        'details' => 'http://plugins.dotaddict.org/dc2/details/lastBlogUpdate',
+        'repository' => 'https://raw.githubusercontent.com/JcDenis/lastBlogUpdate/master/dcstore.xml'
+    ]
 );
