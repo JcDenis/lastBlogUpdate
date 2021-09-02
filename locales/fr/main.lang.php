@@ -58,4 +58,3 @@ $GLOBALS['__l10n']['Text for media update:'] = 'Texte pour la date de mise à jo
 $GLOBALS['__l10n']['Show the dates of last updates of your blog in a widget'] = 'Afficher les dates des dernières mises à jour de votre blog';
 
 $GLOBALS['__l10n']['Last blog update'] = 'Dernières mises à jour du blog';
-
