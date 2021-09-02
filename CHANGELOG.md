@@ -1,31 +1,34 @@
-v2021.08.27
+2021.08.27.1
+- [ ] ?
+
+2021.08.27
 - cleanup (PSR2, short array, ...)
 - enhance widget style
 - update license
 
-v2015.04.22 - Pierre Van Glabeke
+2015.04.22 - Pierre Van Glabeke
 - modif url support
 - suppression icône
 
-v2015.01.29 - Pierre Van Glabeke
+2015.01.29 - Pierre Van Glabeke
 - ajout option hors ligne widget
 - modif code pour affichage widget (compatibilité currywurst)
 - modifs locales
 
-v2013.11.12
+2013.11.12
 - Tiny clean up and add options to widgets
 
-v2013.06.30
+2013.06.30
 - Used new 'homeonly' style for widgets
 
-v0.5 - 2010-06-05
+0.5 - 2010-06-05
 - Switched to DC 2.2
 
-v0.4
+0.4
 - Added media update
 - Moved public function to _public.php
 - Fixed some l10n
 
-v0.3
+0.3
 - Fixed php 5.3 compatibility
 - Fixed wrong timezone
