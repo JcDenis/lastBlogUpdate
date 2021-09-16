@@ -16,10 +16,10 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    'lastBlogUpdate',
+    'Last blog update',
     'Show the dates of last updates of your blog in a widget',
     'Jean-Christian Denis, Pierre Van Glabeke',
-    '2021.08.27.1',
+    '2021.09.17',
     [
         'permissions' => 'usage,contentadmin',
         'type' => 'plugin',
