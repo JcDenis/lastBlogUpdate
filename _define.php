@@ -21,9 +21,9 @@ $this->registerModule(
     'Jean-Christian Denis, Pierre Van Glabeke',
     '2021.09.17',
     [
+        'requires' => [['core', '2.19']],
         'permissions' => 'usage,contentadmin',
         'type' => 'plugin',
-        'dc_min' => '2.19',
         'support' => 'http://forum.dotclear.org/viewtopic.php?pid=332950#p332950',
         'details' => 'http://plugins.dotaddict.org/dc2/details/lastBlogUpdate',
         'repository' => 'https://raw.githubusercontent.com/JcDenis/lastBlogUpdate/master/dcstore.xml'
