@@ -1,34 +1,31 @@
 <?php
 /**
  * @brief lastBlogUpdate, a plugin for Dotclear 2
- * 
+ *
  * @package Dotclear
  * @subpackage Plugin
- * 
+ *
  * @author Jean-Christian Denis, Pierre Van Glabeke
- * 
+ *
  * @copyright Jean-Christian Denis
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
 if (!defined('DC_RC_PATH')) {
     return null;
 }
 
-$core->addBehavior('initWidgets', 'lastBlogUpdateWidgetAdmin');
+dcCore::app()->addBehavior('initWidgets', 'lastBlogUpdateWidgetAdmin');
 
 function lastBlogUpdateWidgetAdmin($w)
 {
-    global $core;
-
     $w
             ->create(
-            'lastblogupdate',
-            __('LastBlogUpdate: dates of lastest updates'),
-            'lastBlogUpdateWidgetPublic',
-            null,
-            "Show the dates of last updates of your blog in a widget"
-        )
+                'lastblogupdate',
+                __('LastBlogUpdate: dates of lastest updates'),
+                'lastBlogUpdateWidgetPublic',
+                null,
+                'Show the dates of last updates of your blog in a widget'
+            )
         ->addTitle(__('Dates of lastest updates'))
         ->setting(
             'blog_show',
@@ -104,7 +101,7 @@ function lastBlogUpdateWidgetAdmin($w)
         );
 
     # --BEHAVIOR-- lastBlogUpdateWidgetInit
-    $core->callBehavior('lastBlogUpdateWidgetInit', $w);
+    dcCore::app()->callBehavior('lastBlogUpdateWidgetInit', $w);
 
     $w->lastblogupdate
         ->addHomeOnly()
