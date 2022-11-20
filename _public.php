@@ -24,7 +24,7 @@ function lastBlogUpdateWidgetPublic($w)
 
     # Nothing to display
     if ($w->homeonly == 1 && dcCore::app()->url->type != 'default'
-    || $w->homeonly  == 2  && dcCore::app()->url->type == 'default'
+    || $w->homeonly  == 2 && dcCore::app()->url->type == 'default'
     || !$w->blog_show     && !$w->post_show && !$w->comment_show && !$w->media_show
     || !$w->blog_text     && !$w->post_text && !$w->comment_text && !$w->media_text) {
         return null;

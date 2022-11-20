@@ -18,7 +18,7 @@ $this->registerModule(
     'Last blog update',
     'Show the dates of last updates of your blog in a widget',
     'Jean-Christian Denis, Pierre Van Glabeke',
-    '2022.11.12',
+    '2022.11.20',
     [
         'requires'    => [['core', '2.24']],
         'permissions' => dcCore::app()->auth->makePermissions([
