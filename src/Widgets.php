@@ -16,10 +16,10 @@ namespace Dotclear\Plugin\lastBlogUpdate;
 
 use dcCore;
 use dcMedia;
+use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsStack;
 use Dotclear\Plugin\widgets\WidgetsElement;
-use dt;
 
 class Widgets
 {
@@ -119,7 +119,7 @@ class Widgets
 
     public static function parseWidget(WidgetsElement $w): string
     {
-        if ($w->offline) {
+        if ($w->offline || is_null(dcCore::app()->blog)) {
             return '';
         }
 
@@ -135,7 +135,7 @@ class Widgets
         # Blog
         if ($w->blog_show && $w->blog_text) {
             $title = $w->blog_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->blog_title)) : '';
-            $text  = dt::str($w->blog_text, (int) dcCore::app()->blog->upddt, dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+            $text  = Date::str($w->blog_text, (int) dcCore::app()->blog->upddt, dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
             $blog  = sprintf('<li>%s %s</li>', $title, $text);
         }
 
@@ -144,7 +144,7 @@ class Widgets
             $rs = dcCore::app()->blog->getPosts(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->post_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->post_title)) : '';
-                $text  = dt::str($w->post_text, (int) strtotime($rs->f('post_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+                $text  = Date::str($w->post_text, (int) strtotime($rs->f('post_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
                 $link  = $rs->getURL();
                 $over  = $rs->f('post_title');
 
@@ -157,7 +157,7 @@ class Widgets
             $rs = dcCore::app()->blog->getComments(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->comment_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->comment_title)) : '';
-                $text  = dt::str($w->comment_text, (int) strtotime($rs->f('comment_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+                $text  = Date::str($w->comment_text, (int) strtotime($rs->f('comment_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
                 $link  = dcCore::app()->blog->url . dcCore::app()->getPostPublicURL($rs->f('post_type'), Html::sanitizeURL($rs->f('post_url'))) . '#c' . $rs->f('comment_id');
                 $over  = $rs->f('post_title');
 
@@ -175,7 +175,7 @@ class Widgets
 
             if (!$rs->isEmpty()) {
                 $title = $w->media_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->media_title)) : '';
-                $text  = dt::str($w->media_text, (int) strtotime($rs->f('media_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+                $text  = Date::str($w->media_text, (int) strtotime($rs->f('media_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
 
                 $media = sprintf('<li>%s %s</li>', $title, $text);
             }
