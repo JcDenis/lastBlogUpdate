@@ -1,3 +1,8 @@
+2023.04.22
+- require dotclear 2.26
+- use latest helper namespace
+- fix nullsafe warnings
+
 2023.03.2025
 - require dotclear 2.26
 - use namespace
