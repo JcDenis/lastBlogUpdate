@@ -29,7 +29,7 @@ class Widgets
         $w
             ->create(
                 'lastblogupdate',
-                __('LastBlogUpdate: dates of lastest updates'),
+                __('Last blog update'),
                 [self::class, 'parseWidget'],
                 null,
                 'Show the dates of last updates of your blog in a widget'
