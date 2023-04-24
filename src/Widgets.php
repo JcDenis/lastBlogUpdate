@@ -16,6 +16,7 @@ namespace Dotclear\Plugin\lastBlogUpdate;
 
 use dcCore;
 use dcMedia;
+use Dotclear\Database\Statement\SelectStatement;
 use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsStack;
@@ -167,13 +168,15 @@ class Widgets
 
         # Media
         if ($w->media_show && $w->media_text) {
-            $rs = dcCore::app()->con->select(
-                'SELECT media_upddt FROM ' . dcCore::app()->prefix . dcMedia::MEDIA_TABLE_NAME . ' ' .
-                "WHERE media_path='" . dcCore::app()->con->escapeStr(dcCore::app()->blog->settings->get('system')->get('public_path')) . "' " .
-                'ORDER BY media_upddt DESC ' . dcCore::app()->con->limit(1)
-            );
+            $sql = new SelectStatement();
+            $rs = $sql->from(dcCore::app()->prefix . dcMedia::MEDIA_TABLE_NAME)
+                ->column('media_upddt')
+                ->where('media_path = ' . $sql->quote((string) dcCore::app()->blog->settings->get('system')->get('public_path')))
+                ->order('media_upddt DESC')
+                ->limit(1)
+                ->select();
 
-            if (!$rs->isEmpty()) {
+            if (!is_null($rs) && !$rs->isEmpty()) {
                 $title = $w->media_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->media_title)) : '';
                 $text  = Date::str($w->media_text, (int) strtotime($rs->f('media_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
 
