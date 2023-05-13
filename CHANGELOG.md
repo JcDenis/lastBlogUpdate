@@ -1,3 +1,7 @@
+2023.05.13
+- require dotclear 2.26
+- fix type hint and nullsafe warnings
+
 2023.04.22
 - require dotclear 2.26
 - use latest helper namespace
