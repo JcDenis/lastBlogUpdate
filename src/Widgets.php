@@ -132,11 +132,12 @@ class Widgets
         }
 
         $blog = $post = $comment = $media = $addons = '';
+        $tz   = is_string(dcCore::app()->blog->settings->get('system')->get('blog_timezone')) ? dcCore::app()->blog->settings->get('system')->get('blog_timezone') : 'UTC';
 
         # Blog
-        if ($w->blog_show && $w->blog_text) {
+        if ($w->blog_show && $w->blog_text && is_numeric(dcCore::app()->blog->upddt)) {
             $title = $w->blog_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->blog_title)) : '';
-            $text  = Date::str($w->blog_text, (int) dcCore::app()->blog->upddt, dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+            $text  = Date::str($w->blog_text, (int) dcCore::app()->blog->upddt, $tz);
             $blog  = sprintf('<li>%s %s</li>', $title, $text);
         }
 
@@ -145,9 +146,9 @@ class Widgets
             $rs = dcCore::app()->blog->getPosts(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->post_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->post_title)) : '';
-                $text  = Date::str($w->post_text, (int) strtotime($rs->f('post_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+                $text  = Date::str($w->post_text, (int) strtotime(is_string($rs->f('post_upddt')) ? $rs->f('post_upddt') : ''), $tz);
                 $link  = $rs->getURL();
-                $over  = $rs->f('post_title');
+                $over  = is_string($rs->f('post_title')) ? $rs->f('post_title') : '';
 
                 $post = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
             }
@@ -158,9 +159,9 @@ class Widgets
             $rs = dcCore::app()->blog->getComments(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->comment_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->comment_title)) : '';
-                $text  = Date::str($w->comment_text, (int) strtotime($rs->f('comment_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
-                $link  = dcCore::app()->blog->url . dcCore::app()->getPostPublicURL($rs->f('post_type'), Html::sanitizeURL($rs->f('post_url'))) . '#c' . $rs->f('comment_id');
-                $over  = $rs->f('post_title');
+                $text  = Date::str($w->comment_text, (int) strtotime(is_string($rs->f('comment_upddt')) ? $rs->f('comment_upddt') : ''), $tz);
+                $link  = dcCore::app()->blog->url . dcCore::app()->getPostPublicURL(is_string($rs->f('post_type')) ? $rs->f('post_type') : '', Html::sanitizeURL(is_string($rs->f('post_url')) ? $rs->f('post_url') : '')) . '#c' . $rs->f('comment_id');
+                $over  = is_string($rs->f('post_title')) ? $rs->f('post_title') : '';
 
                 $comment = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
             }
@@ -168,17 +169,18 @@ class Widgets
 
         # Media
         if ($w->media_show && $w->media_text) {
-            $sql = new SelectStatement();
-            $rs = $sql->from(dcCore::app()->prefix . dcMedia::MEDIA_TABLE_NAME)
+            $path = dcCore::app()->blog->settings->get('system')->get('public_path');
+            $sql  = new SelectStatement();
+            $rs   = $sql->from(dcCore::app()->prefix . dcMedia::MEDIA_TABLE_NAME)
                 ->column('media_upddt')
-                ->where('media_path = ' . $sql->quote((string) dcCore::app()->blog->settings->get('system')->get('public_path')))
+                ->where('media_path = ' . $sql->quote(is_string($path) ? $path : ''))
                 ->order('media_upddt DESC')
                 ->limit(1)
                 ->select();
 
             if (!is_null($rs) && !$rs->isEmpty()) {
                 $title = $w->media_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->media_title)) : '';
-                $text  = Date::str($w->media_text, (int) strtotime($rs->f('media_upddt')), dcCore::app()->blog->settings->get('system')->get('blog_timezone'));
+                $text  = Date::str($w->media_text, (int) strtotime($rs->f('media_upddt')), $tz);
 
                 $media = sprintf('<li>%s %s</li>', $title, $text);
             }
