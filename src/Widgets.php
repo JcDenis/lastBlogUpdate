@@ -1,27 +1,24 @@
 <?php
-/**
- * @brief lastBlogUpdate, a plugin for Dotclear 2
- *
- * @package Dotclear
- * @subpackage Plugin
- *
- * @author Jean-Christian Denis, Pierre Van Glabeke
- *
- * @copyright Jean-Christian Denis
- * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
- */
+
 declare(strict_types=1);
 
 namespace Dotclear\Plugin\lastBlogUpdate;
 
-use dcCore;
-use dcMedia;
+use Dotclear\App;
 use Dotclear\Database\Statement\SelectStatement;
 use Dotclear\Helper\Date;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsStack;
 use Dotclear\Plugin\widgets\WidgetsElement;
 
+/**
+ * @brief   lastBlogUpdate widgets class.
+ * @ingroup lastBlogUpdate
+ *
+ * @author      Jean-Christian Denis
+ * @copyright   Jean-Christian Denis
+ * @copyright   GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
+ */
 class Widgets
 {
     public static function initWidgets(WidgetsStack $w): void
@@ -109,9 +106,9 @@ class Widgets
             );
 
         # --BEHAVIOR-- lastBlogUpdateWidgetInit
-        dcCore::app()->callBehavior('lastBlogUpdateWidgetInit', $w);
+        App::behavior()->callBehavior('lastBlogUpdateWidgetInit', $w);
 
-        $w->lastblogupdate
+        $w->__get('lastblogupdate')
             ->addHomeOnly()
             ->addContentOnly()
             ->addClass()
@@ -120,30 +117,30 @@ class Widgets
 
     public static function parseWidget(WidgetsElement $w): string
     {
-        if ($w->offline || is_null(dcCore::app()->blog)) {
+        if ($w->offline || !App::blog()->isDefined()) {
             return '';
         }
 
         # Nothing to display
-        if (!$w->checkHomeOnly(dcCore::app()->url->type)
+        if (!$w->checkHomeOnly(App::url()->type)
         || !$w->blog_show && !$w->post_show && !$w->comment_show && !$w->media_show
         || !$w->blog_text && !$w->post_text && !$w->comment_text && !$w->media_text) {
             return '';
         }
 
         $blog = $post = $comment = $media = $addons = '';
-        $tz   = is_string(dcCore::app()->blog->settings->get('system')->get('blog_timezone')) ? dcCore::app()->blog->settings->get('system')->get('blog_timezone') : 'UTC';
+        $tz   = is_string(App::blog()->settings()->get('system')->get('blog_timezone')) ? App::blog()->settings()->get('system')->get('blog_timezone') : 'UTC';
 
         # Blog
-        if ($w->blog_show && $w->blog_text && is_numeric(dcCore::app()->blog->upddt)) {
+        if ($w->blog_show && $w->blog_text) {
             $title = $w->blog_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->blog_title)) : '';
-            $text  = Date::str($w->blog_text, (int) dcCore::app()->blog->upddt, $tz);
+            $text  = Date::str($w->blog_text, App::blog()->upddt(), $tz);
             $blog  = sprintf('<li>%s %s</li>', $title, $text);
         }
 
         # Post
         if ($w->post_show && $w->post_text) {
-            $rs = dcCore::app()->blog->getPosts(['limit' => 1, 'no_content' => true]);
+            $rs = App::blog()->getPosts(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->post_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->post_title)) : '';
                 $text  = Date::str($w->post_text, (int) strtotime(is_string($rs->f('post_upddt')) ? $rs->f('post_upddt') : ''), $tz);
@@ -156,11 +153,11 @@ class Widgets
 
         # Comment
         if ($w->comment_show && $w->comment_text) {
-            $rs = dcCore::app()->blog->getComments(['limit' => 1, 'no_content' => true]);
+            $rs = App::blog()->getComments(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->comment_title ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->comment_title)) : '';
                 $text  = Date::str($w->comment_text, (int) strtotime(is_string($rs->f('comment_upddt')) ? $rs->f('comment_upddt') : ''), $tz);
-                $link  = dcCore::app()->blog->url . dcCore::app()->getPostPublicURL(is_string($rs->f('post_type')) ? $rs->f('post_type') : '', Html::sanitizeURL(is_string($rs->f('post_url')) ? $rs->f('post_url') : '')) . '#c' . $rs->f('comment_id');
+                $link  = App::blog()->url() . App::postTypes()->get(is_string($rs->f('post_type')) ? $rs->f('post_type') : '')->publicUrl(Html::sanitizeURL(is_string($rs->f('post_url')) ? $rs->f('post_url') : '')) . '#c' . $rs->f('comment_id');
                 $over  = is_string($rs->f('post_title')) ? $rs->f('post_title') : '';
 
                 $comment = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
@@ -169,9 +166,9 @@ class Widgets
 
         # Media
         if ($w->media_show && $w->media_text) {
-            $path = dcCore::app()->blog->settings->get('system')->get('public_path');
+            $path = App::blog()->settings()->get('system')->get('public_path');
             $sql  = new SelectStatement();
-            $rs   = $sql->from(dcCore::app()->prefix . dcMedia::MEDIA_TABLE_NAME)
+            $rs   = $sql->from(App::con()->prefix() . App::postMedia()::MEDIA_TABLE_NAME)
                 ->column('media_upddt')
                 ->where('media_path = ' . $sql->quote(is_string($path) ? $path : ''))
                 ->order('media_upddt DESC')
@@ -187,7 +184,7 @@ class Widgets
         }
 
         # --BEHAVIOR-- lastBlogUpdateWidgetParse
-        $addons = dcCore::app()->callBehavior('lastBlogUpdateWidgetParse', $w);
+        $addons = App::behavior()->callBehavior('lastBlogUpdateWidgetParse', $w);
 
         # Nothing to display
         if (!$blog && !$post && !$comment && !$media && !$addons) {

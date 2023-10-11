@@ -1,25 +1,22 @@
 # README
 
-[![Release](https://img.shields.io/badge/release-2023.08.12-a2cbe9.svg)](https://git.dotclear.watch/JcDenis/lastBlogUpdate/releases)
-[![Date](https://img.shields.io/badge/date-2023.08.12-c44d58.svg)](https://git.dotclear.watch/JcDenis/lastBlogUpdate/releases)
-[![Dotclear](https://img.shields.io/badge/dotclear-v2.27-137bbb.svg)](https://fr.dotclear.org/download)
+[![Release](https://img.shields.io/badge/release-2023.10.11-a2cbe9.svg)](https://git.dotclear.watch/JcDenis/lastBlogUpdate/releases)
+![Date](https://img.shields.io/badge/date-2023.10.11-c44d58.svg)
+[![Dotclear](https://img.shields.io/badge/dotclear-v2.28-137bbb.svg)](https://fr.dotclear.org/download)
 [![Dotaddict](https://img.shields.io/badge/dotaddict-official-9ac123.svg)](https://plugins.dotaddict.org/dc2/details/lastBlogUpdate)
-[![License](https://img.shields.io/github/license/JcDenis/lastBlogUpdate)](https://git.dotclear.watch/JcDenis/lastBlogUpdate/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-GPL--2.0-ececec.svg)](https://git.dotclear.watch/JcDenis/lastBlogUpdate/src/branch/master/LICENSE)
 
-## WHAT IS LASTBLOGUPDATE ?
+## ABOUT
 
-_last blog update_ is a plugin for the open-source 
-web publishing software called Dotclear.
+_lastBlogUpdate_ is a plugin for the open-source web publishing software called [Dotclear](https://www.dotclear.org).
 
-Simply show visitors last update of posts, comments, etc of your blog.
+> Simply show visitors last update of posts, comments, etc of your blog.
 
 ## REQUIREMENTS
 
-_lastBlogUpdate_ requires: 
-
 * permissions to manage widgets
-* Dotclear 2.27
-* PHP 7.4+
+* Dotclear 2.28
+* PHP 8.1+
 
 ## USAGE
 
@@ -30,14 +27,15 @@ Add and configure _Last blog update_ from widgets manager.
 
 ## LINKS
 
-* License : [GNU GPL v2](https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html)
-* Source & contribution : [Gitea Page](https://git.dotclear.watch/JcDenis/lastBlogUpdate) or [GitHub Page](https://github.com/JcDenis/lastBlogUpdate)
-* Packages & details : [Gitea Page](https://git.dotclear.watch/JcDenis/lastBlogUpdate/releases) or [Dotaddict Page](https://plugins.dotaddict.org/dc2/details/lastBlogUpdate)
-* Discuss and help : [Dotclear Forum](ttp://forum.dotclear.org/viewtopic.php?pid=332950#p332950)
+* [License](https://git.dotclear.watch/JcDenis/lastBlogUpdate/src/branch/master/LICENSE)
+* [Packages & details](https://git.dotclear.watch/JcDenis/lastBlogUpdate/releases) (or on [Dotaddict](https://plugins.dotaddict.org/dc2/details/lastBlogUpdate))
+* [Sources & contributions](https://git.dotclear.watch/JcDenis/lastBlogUpdate) (or on [GitHub](https://github.com/JcDenis/lastBlogUpdate))
+* [Issues & security](https://git.dotclear.watch/JcDenis/lastBlogUpdate/issues) (or on [GitHub](https://github.com/JcDenis/lastBlogUpdate/issues))
+* [Discuss & help](ttp://forum.dotclear.org/viewtopic.php?pid=332950#p332950)
 
 ## CONTRIBUTORS
 
-* Jean-Christian Denis
+* Jean-Christian Denis (author)
 * Pierre Van Glabeke
 
 You are welcome to contribute to this code.
