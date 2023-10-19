@@ -9,14 +9,13 @@
  * Show the dates of last updates of your blog in a widget.
  *
  * @author      Jean-Christian Denis
- * @copyright   Jean-Christian Denis
  * @copyright   GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 $this->registerModule(
     'Last blog update',
     'Show the dates of last updates of your blog in a widget',
     'Jean-Christian Denis, Pierre Van Glabeke',
-    '2023.10.11',
+    '2023.10.19',
     [
         'requires'    => [['core', '2.28']],
         'permissions' => 'My',

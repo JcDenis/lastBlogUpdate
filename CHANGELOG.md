@@ -1,3 +1,9 @@
+lastBlogUpdate 2023.10.19
+===========================================================
+* Require Dotclear 2.28
+* Require PHP 8.1
+* Code review (callable)
+
 lastBlogUpdate 2023.10.11
 ===========================================================
 * Require Dotclear 2.28

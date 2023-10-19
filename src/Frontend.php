@@ -12,7 +12,6 @@ use Dotclear\Core\Process;
  * @ingroup lastBlogUpdate
  *
  * @author      Jean-Christian Denis
- * @copyright   Jean-Christian Denis
  * @copyright   GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 class Frontend extends Process
@@ -28,9 +27,7 @@ class Frontend extends Process
             return false;
         }
 
-        App::behavior()->addBehaviors([
-            'initWidgets' => [Widgets::class, 'initWidgets'],
-        ]);
+        App::behavior()->addBehavior('initWidgets', Widgets::initWidgets(...));
 
         return true;
     }

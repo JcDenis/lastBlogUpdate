@@ -16,7 +16,6 @@ use Dotclear\Plugin\widgets\WidgetsElement;
  * @ingroup lastBlogUpdate
  *
  * @author      Jean-Christian Denis
- * @copyright   Jean-Christian Denis
  * @copyright   GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 class Widgets
@@ -27,7 +26,7 @@ class Widgets
             ->create(
                 'lastblogupdate',
                 __('Last blog update'),
-                [self::class, 'parseWidget'],
+                self::parseWidget(...),
                 null,
                 'Show the dates of last updates of your blog in a widget'
             )
