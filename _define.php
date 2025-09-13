@@ -15,7 +15,7 @@ $this->registerModule(
     'Last blog update',
     'Show the dates of last updates of your blog in a widget',
     'Jean-Christian Denis, Pierre Van Glabeke',
-    '2025.09.09',
+    '2025.09.13',
     [
         'requires'    => [['core', '2.36']],
         'permissions' => 'My',
