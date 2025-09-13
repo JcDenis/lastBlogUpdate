@@ -2,10 +2,10 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="lastBlogUpdate">
     <name>Last blog update</name>
-    <version>2025.09.09</version>
+    <version>2025.09.13</version>
     <author>Jean-Christian Denis, Pierre Van Glabeke</author>
     <desc>Show the dates of last updates of your blog in a widget</desc>
-    <file>https://github.com/JcDenis/lastBlogUpdate/releases/download/v2025.09.09/plugin-lastBlogUpdate.zip</file>
+    <file>https://github.com/JcDenis/lastBlogUpdate/releases/download/v2025.09.13/plugin-lastBlogUpdate.zip</file>
     <da:dcmin>2.36</da:dcmin>
     <da:details>https://github.com/JcDenis/lastBlogUpdate/src/branch/master/README.md</da:details>
     <da:support>https://github.com/JcDenis/lastBlogUpdate/issues</da:support>
