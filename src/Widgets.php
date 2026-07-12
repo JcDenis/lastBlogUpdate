@@ -142,9 +142,9 @@ class Widgets
             $rs = App::blog()->getPosts(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->get('post_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('post_title'))) : '';
-                $text  = Date::str($w->get('post_text'), (int) strtotime(is_string($rs->f('post_upddt')) ? $rs->f('post_upddt') : ''), $tz);
+                $text  = Date::str($w->get('post_text'), strtotime($rs->strField('post_upddt')), $tz);
                 $link  = $rs->getURL();
-                $over  = is_string($rs->f('post_title')) ? $rs->f('post_title') : '';
+                $over  = $rs->strField('post_title');
 
                 $post = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
             }
@@ -155,9 +155,9 @@ class Widgets
             $rs = App::blog()->getComments(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
                 $title = $w->get('comment_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('comment_title'))) : '';
-                $text  = Date::str($w->get('comment_text'), (int) strtotime(is_string($rs->f('comment_upddt')) ? $rs->f('comment_upddt') : ''), $tz);
-                $link  = App::blog()->url() . App::postTypes()->get(is_string($rs->f('post_type')) ? $rs->f('post_type') : '')->publicUrl(Html::sanitizeURL(is_string($rs->f('post_url')) ? $rs->f('post_url') : '')) . '#c' . $rs->f('comment_id');
-                $over  = is_string($rs->f('post_title')) ? $rs->f('post_title') : '';
+                $text  = Date::str($w->get('comment_text'), (int) strtotime($rs->strField('comment_upddt')), $tz);
+                $link  = App::blog()->url() . App::postTypes()->get($rs->strField('post_type'))->publicUrl(Html::sanitizeURL($rs->strField('post_url'))) . '#c' . $rs->strField('comment_id');
+                $over  = $rs->strField('post_title');
 
                 $comment = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
             }
@@ -176,7 +176,7 @@ class Widgets
 
             if (!is_null($rs) && !$rs->isEmpty()) {
                 $title = $w->get('media_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('media_title'))) : '';
-                $text  = Date::str($w->get('media_text'), (int) strtotime($rs->f('media_upddt')), $tz);
+                $text  = Date::str($w->get('media_text'), (int) strtotime($rs->strField('media_upddt')), $tz);
 
                 $media = sprintf('<li>%s %s</li>', $title, $text);
             }
