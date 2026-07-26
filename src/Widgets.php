@@ -104,10 +104,14 @@ class Widgets
                 'text'
             );
 
-        # --BEHAVIOR-- lastBlogUpdateWidgetInit
+        # --BEHAVIOR-- lastBlogUpdateWidgetInit - WidgetsElement
         App::behavior()->callBehavior('lastBlogUpdateWidgetInit', $w);
 
-        $w->__get('lastblogupdate')
+        $_ = $w->get('lastblogupdate');
+        if (!($_ instanceof WidgetsElement)) {
+            return;
+        }
+        $_
             ->addHomeOnly()
             ->addContentOnly()
             ->addClass()
@@ -116,12 +120,12 @@ class Widgets
 
     public static function parseWidget(WidgetsElement $w): string
     {
-        if ($w->offline || !App::blog()->isDefined()) {
+        if ($w->get('offline') || !App::blog()->isDefined()) {
             return '';
         }
 
         # Nothing to display
-        if (!$w->checkHomeOnly(App::url()->type)
+        if (!$w->checkHomeOnly(App::url()->getType())
         || !$w->get('blog_show') && !$w->get('post_show') && !$w->get('comment_show') && !$w->get('media_show')
         || !$w->get('blog_text') && !$w->get('post_text') && !$w->get('comment_text') && !$w->get('media_text')) {
             return '';
@@ -132,8 +136,8 @@ class Widgets
 
         # Blog
         if ($w->get('blog_show') && $w->get('blog_text')) {
-            $title = $w->get('blog_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('blog_title'))) : '';
-            $text  = Date::str($w->get('blog_text'), App::blog()->upddt(), $tz);
+            $title = is_string($w->get('blog_title')) && !empty($w->get('blog_title')) ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('blog_title'))) : '';
+            $text  = is_string($w->get('blog_text')) ? Date::str($w->get('blog_text'), App::blog()->upddt(), $tz) : '';
             $blog  = sprintf('<li>%s %s</li>', $title, $text);
         }
 
@@ -141,8 +145,8 @@ class Widgets
         if ($w->get('post_show') && $w->get('post_text')) {
             $rs = App::blog()->getPosts(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
-                $title = $w->get('post_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('post_title'))) : '';
-                $text  = Date::str($w->get('post_text'), strtotime($rs->strField('post_upddt')), $tz);
+                $title = is_string($w->get('post_title')) && !empty($w->get('post_title')) ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('post_title'))) : '';
+                $text  = is_string($w->get('post_text')) ? Date::str($w->get('post_text'), strtotime($rs->strField('post_upddt')), $tz) : '';
                 $link  = $rs->getURL();
                 $over  = $rs->strField('post_title');
 
@@ -154,8 +158,8 @@ class Widgets
         if ($w->get('comment_show') && $w->get('comment_text')) {
             $rs = App::blog()->getComments(['limit' => 1, 'no_content' => true]);
             if (!$rs->isEmpty()) {
-                $title = $w->get('comment_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('comment_title'))) : '';
-                $text  = Date::str($w->get('comment_text'), (int) strtotime($rs->strField('comment_upddt')), $tz);
+                $title = is_string($w->get('comment_title')) && !empty($w->get('comment_title')) ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('comment_title'))) : '';
+                $text  = is_string($w->get('comment_text')) ? Date::str($w->get('comment_text'), (int) strtotime($rs->strField('comment_upddt')), $tz) : '';
                 $link  = App::blog()->url() . App::postTypes()->get($rs->strField('post_type'))->publicUrl(Html::sanitizeURL($rs->strField('post_url'))) . '#c' . $rs->strField('comment_id');
                 $over  = $rs->strField('post_title');
 
@@ -175,8 +179,8 @@ class Widgets
                 ->select();
 
             if (!is_null($rs) && !$rs->isEmpty()) {
-                $title = $w->get('media_title') ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('media_title'))) : '';
-                $text  = Date::str($w->get('media_text'), (int) strtotime($rs->strField('media_upddt')), $tz);
+                $title = is_string($w->get('media_title')) && !empty($w->get('media_title')) ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('media_title'))) : '';
+                $text  = is_string($w->get('media_text')) ? Date::str($w->get('media_text'), (int) strtotime($rs->strField('media_upddt')), $tz) : '';
 
                 $media = sprintf('<li>%s %s</li>', $title, $text);
             }
@@ -193,9 +197,9 @@ class Widgets
         # Display
         return $w->renderDiv(
             (bool) $w->get('content_only'),
-            'lastblogupdate ' . $w->get('class'),
+            'lastblogupdate' . (is_string($w->get('class')) ? ' ' . $w->get('class') : ''),
             '',
-            ($w->get('title') ? $w->renderTitle(Html::escapeHTML($w->get('title'))) : '') .
+            (is_string($w->get('title')) && !empty($w->get('title')) ? $w->renderTitle(Html::escapeHTML($w->get('title'))) : '') .
                 sprintf('<ul>%s</ul>', $blog . $post . $comment . $media . $addons)
         );
     }
