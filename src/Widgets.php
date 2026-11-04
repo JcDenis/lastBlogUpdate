@@ -160,7 +160,7 @@ class Widgets
             if (!$rs->isEmpty()) {
                 $title = is_string($w->get('comment_title')) && !empty($w->get('comment_title')) ? sprintf('<strong>%s</strong>', Html::escapeHTML($w->get('comment_title'))) : '';
                 $text  = is_string($w->get('comment_text')) ? Date::str($w->get('comment_text'), (int) strtotime($rs->strField('comment_upddt')), $tz) : '';
-                $link  = App::blog()->url() . App::postTypes()->get($rs->strField('post_type'))->publicUrl(Html::sanitizeURL($rs->strField('post_url'))) . '#c' . $rs->strField('comment_id');
+                $link  = App::blog()->url() . App::postTypes()->get($rs->strField('post_type'))->publicUrl(Html::sanitizeURL($rs->strField('post_url'))) . '#c' . $rs->intField('comment_id');
                 $over  = $rs->strField('post_title');
 
                 $comment = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
