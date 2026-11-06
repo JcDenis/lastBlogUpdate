@@ -37,5 +37,6 @@ Add and configure _Last blog update_ from widgets manager.
 
 * Jean-Christian Denis (author)
 * Pierre Van Glabeke
+* Claude (AI assistant by Anthropic)
 
 You are welcome to contribute to this code.
