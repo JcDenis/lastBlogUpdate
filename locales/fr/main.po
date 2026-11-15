@@ -61,7 +61,7 @@ msgstr "Titre pour la date de mise à jour des commentaires :"
 
 #: _widgets.php:78
 msgid "Comments:"
-msgstr "Commentaires :"
+msgstr "Commentaires :"
 
 #: _widgets.php:83
 msgid "Text for comments update:"
