@@ -2,7 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/jcdenis/lastBlogUpdate?color=lightblue)](https://github.com/JcDenis/lastBlogUpdate/releases)
 ![Date](https://img.shields.io/github/release-date/jcdenis/lastBlogUpdate?color=red)
-[![Dotclear](https://img.shields.io/badge/dotclear-v2.36-137bbb.svg)](https://fr.dotclear.org/download)
+[![Dotclear](https://img.shields.io/badge/dotclear-v2.39-137bbb.svg)](https://fr.dotclear.org/download)
 [![Repository](https://img.shields.io/badge/repository-official-9ac123.svg)](https://dotclear.org/plugin/detail/lastBlogUpdate)
 [![License](https://img.shields.io/github/license/jcdenis/lastBlogUpdate?color=white)](https://github.com/JcDenis/lastBlogUpdate/blob/master/LICENSE)
 
@@ -20,7 +20,7 @@ _lastBlogUpdate_ is a plugin for the open-source web publishing software called 
 
 ## USAGE
 
-First install _lastBlogUpdate_, manualy from a zip package or from 
+First install _lastBlogUpdate_, manually from a zip package or from 
 Dotclear plugins repository. (See Dotclear's documentation to know how do this)
 
 Add and configure _Last blog update_ from widgets manager.
@@ -31,7 +31,7 @@ Add and configure _Last blog update_ from widgets manager.
 * [Packages & details](https://github.com/JcDenis/lastBlogUpdate/releases) (or on [Repository](https://dotclear.org/plugin/detail/lastBlogUpdate))
 * [Sources & contributions](https://github.com/JcDenis/lastBlogUpdate)
 * [Issues & security](https://github.com/JcDenis/lastBlogUpdate/issues)
-* [Discuss & help](ttp://forum.dotclear.org/viewtopic.php?pid=332950#p332950)
+* [Discuss & help](https://forum.dotclear.org/viewtopic.php?pid=332950#p332950)
 
 ## CONTRIBUTORS
 
