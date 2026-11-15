@@ -150,7 +150,7 @@ class Widgets
                 $link  = $rs->getURL();
                 $over  = $rs->strField('post_title');
 
-                $post = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
+                $post = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, Html::escapeURL($link), Html::escapeHTML($over), Html::escapeHTML($text));
             }
         }
 
@@ -163,7 +163,7 @@ class Widgets
                 $link  = App::blog()->url() . App::postTypes()->get($rs->strField('post_type'))->publicUrl(Html::sanitizeURL($rs->strField('post_url'))) . '#c' . $rs->intField('comment_id');
                 $over  = $rs->strField('post_title');
 
-                $comment = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, $link, $over, $text);
+                $comment = sprintf('<li>%s <a href="%s" title="%s">%s</a></li>', $title, Html::escapeURL($link), Html::escapeHTML($over), Html::escapeHTML($text));
             }
         }
 
