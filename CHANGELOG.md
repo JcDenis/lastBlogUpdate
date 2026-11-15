@@ -1,6 +1,5 @@
 lastBlogUpdate 2026.11.15
 ===========================================================
-* Add Claude to contributors
 * [fix] Escape link URL, title and text
 * [docs] Add a user guide in French, with screenshots
 
