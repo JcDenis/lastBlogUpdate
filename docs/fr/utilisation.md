@@ -46,4 +46,4 @@ Le gadget ne s'affiche pas du tout s'il n'y a rien à montrer : par exemple si t
 
 * La ligne « Médias » n'apparaît que si le dossier public du blog contient des médias connus de la médiathèque.
 * La date de mise à jour du blog est celle de la dernière modification enregistrée par Dotclear (nouvelle publication, commentaire, etc.), pas la date de dernière visite.
-* Le titre du billet utilisé dans l'infobulle du lien n'est pas protégé : un titre contenant des guillemets (`"`) ou du HTML casse le code de la page à cet endroit.
+* Le titre du billet affiché au survol est échappé : un titre contenant des guillemets ou du HTML s'affiche tel quel, sans casser la page.
