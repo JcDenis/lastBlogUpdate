@@ -1,3 +1,7 @@
+lastBlogUpdate 2026.11.15.1 - 2026.11.15
+===========================================================
+* [lang] Do not override core translations
+
 lastBlogUpdate 2026.11.15
 ===========================================================
 * [fix] Escape link URL, title and text
