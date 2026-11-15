@@ -12,6 +12,8 @@ _lastBlogUpdate_ is a plugin for the open-source web publishing software called 
 
 > Simply show visitors last update of posts, comments, etc of your blog.
 
+A [user guide in French](https://github.com/JcDenis/lastBlogUpdate/blob/master/docs/fr/utilisation.md) is available.
+
 ## REQUIREMENTS
 
 * Dotclear 2.39
@@ -27,6 +29,7 @@ Add and configure _Last blog update_ from widgets manager.
 
 ## LINKS
 
+* [User guide (in French)](https://github.com/JcDenis/lastBlogUpdate/blob/master/docs/fr/utilisation.md)
 * [License](https://github.com/JcDenis/lastBlogUpdate/blob/master/LICENSE)
 * [Packages & details](https://github.com/JcDenis/lastBlogUpdate/releases) (or on [Repository](https://dotclear.org/plugin/detail/lastBlogUpdate))
 * [Sources & contributions](https://github.com/JcDenis/lastBlogUpdate)
